@@ -30,10 +30,8 @@ def translate():
     translated = ""
     if request.method=="POST":
         text = request.form.get("text_to_transalte")
-        
         translated=translator(text,'fr')
-        
-        
+        print(translated)
     return render_template('translate.html', translated=translated)
 
 @app.route("/speech",methods=['POST','GET'])
@@ -43,10 +41,7 @@ def speech():
         text = request.form.get("text_to_speech")
         filename = str(uuid.uuid4()) + ".mp3"
         record_path = os.path.join("static", "records", filename)
-        
-        # Save the translated text to audio file
         texttospeech(text, record_path)
-        # Render template with link to download the audio file
         return render_template('speech.html', audio_file=record_path)
     else:
         return render_template('speech.html')

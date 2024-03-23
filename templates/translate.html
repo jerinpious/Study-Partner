@@ -10,8 +10,8 @@
     <div class="topbar">
         
         <nav>
-            <h1>NAME HERE</h1>
-            <h1>Translate</h1>
+            <h1>Study Now!</h1>
+            <h1 class="mainh">Translate</h1>
             <ul>
             <li><a onclick="window.location.href='translate'">Translate</a></li>
             <li><a onclick="window.location.href='speech'">Text to Speech</a></li>
@@ -19,10 +19,15 @@
         </nav>
 
     </div>
+    <div class="inputbox">
     <form action="{{ url_for("translate")}}" method="post">
         <input type="text" name ="text_to_transalte" placeholder="Enter Text Here">
+        <div class="submit">
         <button class="buttonb1" type="submit">Translate</button>
-    </form>   
-        <li>{{translated}}</li>
+        </div>
+    </form>
+     <div class="data">{{translated}}</div>  
+        
+    </div>
 </body>
 </html>

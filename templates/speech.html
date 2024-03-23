@@ -10,8 +10,8 @@
     <div class="topbar">
         
         <nav>
-            <h1>NAME HERE</h1>
-            <h1> Text to Speech</h1>
+            <h1>Study Now!</h1>
+            <h1 class="mainh"> Text to Speech</h1>
             <ul>
             <li><a onclick="window.location.href='translate'">Translate</a></li>
             <li><a onclick="window.location.href='speech'">Text to Speech</a></li>
@@ -22,7 +22,12 @@
     <form action="{{ url_for("speech")}}" method="post">
         <input type="text" name ="text_to_speech" placeholder="Enter Text Here">
         <button class="buttonb1" type="submit">Convert</button>
-    </form>   
+    </form>  
+    <form method="get" action={{audio_file}}>
+        <button type="submit">Download!</button>
+     </form>
+    
+    
         
 </body>
 </html>
