@@ -82,10 +82,13 @@ nav ul li a:hover::after{
 }
 .inputbox{
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     height: 50vh;
+}
+.inputbox p{
+    font-family: gotham;
 }
 .inputbox input[type="text"] {
     width: 300px; 

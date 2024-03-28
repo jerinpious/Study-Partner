@@ -20,9 +20,21 @@
 
     </div>
     <div class="inputbox">
-    <form action="{{ url_for("translate")}}" method="post">
+    <form action="{{ url_for("translate")}}" method="post" enctype='multipart/form-data'>
         <input type="text" name ="text_to_transalte" placeholder="Enter Text Here">
-        <div class="submit">
+        <p>or upload a document</p>
+
+        <input type="file" name="file" accept=".txt, .pdf"><br><br>
+        <input type="submit" value="Upload">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
         <button class="buttonb1" type="submit">Translate</button>
         </div>
     </form>
