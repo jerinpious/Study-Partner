@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="topbar">
+        
+        <nav>
+            <h1>Study Now!</h1>
+            <h1 class="mainh">Ai Partner</h1>
+            <ul>
+            <li><a onclick="window.location.href='translate'">Translate</a></li>
+            <li><a onclick="window.location.href='speech'">Text to Speech</a></li>
+            </ul>        
+        </nav>
+
+    </div>
+    <div class="inputbox">
+        <form action="{{ url_for("aiNote")}}" method="post">
+        <input type="text" name="prompt" placeholder="Enter the topic">
+        <button class="buttonb1" type="submit">Generate</button>
+        </form>
+    </div>
+    {% if note %}
+    <div class="structured-notes">{{ note }}</div>
+    {% endif %}
+</body>
+</html>

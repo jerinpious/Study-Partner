@@ -66,6 +66,7 @@ nav ul li a{
     text-decoration: none;
     font-size: 18px;
     position: relative;
+    cursor: pointer;
 }
 nav ul li a::after{
     content:'';
@@ -76,6 +77,7 @@ nav ul li a::after{
     left: 0;
     bottom: -6px;
     transition: 0.5s;
+    
 }
 nav ul li a:hover::after{
     width: 100%;
@@ -85,7 +87,7 @@ nav ul li a:hover::after{
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    height: 50vh;
+    margin-top: 50px;
 }
 .inputbox p{
     font-family: gotham;
@@ -114,4 +116,10 @@ nav ul li a:hover::after{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+.structured-notes {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+    white-space: pre-wrap; 
 }

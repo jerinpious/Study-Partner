@@ -7,17 +7,21 @@ from flask import render_template,request
 from flask_wtf import FlaskForm
 from wtforms import FileField,SubmitField
 from werkzeug.utils import secure_filename
+import openai
+from dotenv import load_dotenv
 
+
+load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY']='secretkey'
 app.config['UPLOAD_FOLDER'] = 'static/files'
 ALLOWED_EXTENSIONS= {'txt','pdf'}
+#API_KEY = open("API_KEY", "r").read()
+openai.api_key = os.getenv("API_KEY")
+chat_log = [{"role":"system","content":"You should provide well structured notes for the topic given"}]
 
 tts = pyttsx3.init()
 
-def allowed_file(filename):
-    return '.' in filename and \
-    filename.rsplit('.',1)[1].lower() in ALLOWED_EXTENSIONS
 
 def texttospeech(text,record):
     tts.say(text)
@@ -38,12 +42,6 @@ def hello_world():
 def translate():
     translated = ""
     if request.method=="POST":
-        file = request.files['file']
-        
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return render_template('translate.html', translated=translated)
         text = request.form.get("text_to_transalte")
         translated=translator(text,'fr')
         print(translated)
@@ -64,6 +62,22 @@ def speech():
         return render_template('speech.html')
     
 
+@app.route("/partner",methods=['POST','GET'])
+def aiNote():
+    if request.method == "POST":
+        prompt = request.form.get("prompt")
+        chat_log.append({"role":"user","content": prompt})
+        response = openai.ChatCompletion.create(
+        model = "gpt-3.5-turbo",
+        messages = chat_log
+        )
+        notes = response['choices'][0]['message']['content']
+        note = notes.strip()
+        chat_log.append({"role":"assistant","content": notes})
+        print(note)
+        return render_template("AiPartner.html", note = note)
+    else:
+        return render_template("AiPartner.html")
 
 
 if __name__ == '__main__':
